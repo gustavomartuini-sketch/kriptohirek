@@ -1,0 +1,17 @@
+name: Fetch & Translate News
+on:
+  schedule:
+    - cron: '0 6,12,18,0 * * *'   # 4x per day: 06:00, 12:00, 18:00, 00:00 UTC
+  workflow_dispatch:                 # Manual trigger from GitHub UI
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger cron endpoint
+        run: |
+          curl -s -X GET "https://kriptohirek3.vercel.app/api/cron?secret=${{ secrets.CRON_SECRET }}" \
+            -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
+            --max-time 55 \
+            --retry 2
+          echo "Cron triggered at $(date)"
