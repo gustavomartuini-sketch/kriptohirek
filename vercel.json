@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    { "source": "/hir/:slug", "destination": "/hir/index.html" }
+  ],
+  "functions": {
+    "api/cron.js":      { "maxDuration": 60 },
+    "api/news.js":      { "maxDuration": 10 },
+    "api/article.js":   { "maxDuration": 30 },
+    "api/translate.js": { "maxDuration": 15 }
+  },
+  "headers": [
+    { "source": "/api/(.*)", "headers": [
+      { "key": "Access-Control-Allow-Origin", "value": "*" }
+    ]}
+  ]
+}

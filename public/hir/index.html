@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title id="pt">Hír — KriptoHírek.hu</title>
+<meta id="pd" name="description" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Unbounded:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#09090f;--bg2:#111318;--bg3:#181c25;--accent:#f7931a;--accent2:#ffb347;--green:#00d4aa;--text:#e8eaf0;--t2:#7c8496;--t3:#3a3f52;--border:rgba(255,255,255,.06);--bordero:rgba(247,147,26,.22);--font:'Space Grotesk',sans-serif;--head:'Unbounded',sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.7;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:56px;background:rgba(9,9,15,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:var(--head);font-size:16px;font-weight:800;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:7px;}
+.logo-icon{width:28px;height:28px;border-radius:6px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:14px;}
+.back{color:var(--t2);text-decoration:none;font-size:13px;font-weight:600;transition:color .2s;}
+.back:hover{color:var(--accent);}
+.wrap{max-width:760px;margin:0 auto;padding:52px 28px 80px;}
+.art-cat{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.art-cat::before{content:'';width:18px;height:2px;background:var(--accent);border-radius:2px;}
+h1{font-family:var(--head);font-size:clamp(22px,4vw,38px);font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:18px;}
+.art-meta{font-size:12px;color:var(--t3);font-weight:600;margin-bottom:28px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.badge{background:rgba(0,212,170,.1);color:var(--green);border:1px solid rgba(0,212,170,.2);padding:3px 9px;border-radius:5px;font-size:10px;font-weight:700;}
+.art-hero{width:100%;border-radius:14px;overflow:hidden;margin-bottom:32px;aspect-ratio:16/9;position:relative;display:flex;align-items:center;justify-content:center;font-size:80px;}
+.art-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.art-hero-emoji{position:relative;z-index:1;}
+.art-body{font-size:16px;color:var(--t2);line-height:1.9;}
+.art-body p{margin-bottom:20px;}
+.art-body p:first-child{font-size:17px;color:var(--text);font-weight:500;line-height:1.7;}
+.aff-box{background:linear-gradient(135deg,rgba(247,147,26,.1),rgba(247,147,26,.04));border:1px solid var(--bordero);border-radius:14px;padding:22px 24px;margin:36px 0;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+.aff-box h4{font-family:var(--head);font-size:15px;font-weight:700;margin-bottom:5px;}
+.aff-box p{font-size:13px;color:var(--t2);}
+.aff-box a{background:var(--accent);color:#09090f;padding:11px 20px;border-radius:9px;font-weight:700;font-size:13px;text-decoration:none;transition:all .2s;flex-shrink:0;white-space:nowrap;}
+.aff-box a:hover{background:var(--accent2);}
+.related-title{font-family:var(--head);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin:48px 0 20px;display:flex;align-items:center;gap:8px;}
+.related-title::before{content:'';width:3px;height:14px;background:var(--accent);border-radius:2px;}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;}
+.rcard{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;text-decoration:none;color:var(--text);transition:all .2s;}
+.rcard:hover{border-color:var(--bordero);transform:translateY(-2px);}
+.rthumb{height:110px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:30px;position:relative;overflow:hidden;}
+.rthumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.75;}
+.rthumb span{position:relative;z-index:1;}
+.rbody{padding:12px 14px;}
+.rcat{font-size:9px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px;}
+.rtitle{font-size:12px;font-weight:600;line-height:1.4;}
+.sk{background:linear-gradient(90deg,var(--bg2) 25%,var(--bg3) 50%,var(--bg2) 75%);background-size:200% 100%;animation:sh 1.5s infinite;border-radius:6px;}
+@keyframes sh{0%{background-position:200% 0}100%{background-position:-200% 0}}
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:20px 28px;text-align:center;font-size:11px;color:var(--t3);}
+@media(max-width:600px){.wrap{padding:32px 14px 60px;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="logo"><div class="logo-icon">₿</div>KriptoHírek</a>
+  <a href="/" class="back">← Vissza</a>
+</nav>
+<div class="wrap" id="wrap">
+  <div class="sk" style="height:12px;width:80px;margin-bottom:16px"></div>
+  <div class="sk" style="height:40px;width:92%;margin-bottom:10px"></div>
+  <div class="sk" style="height:40px;width:65%;margin-bottom:20px"></div>
+  <div class="sk" style="height:380px;border-radius:14px;margin-bottom:32px"></div>
+  <div class="sk" style="height:16px;margin-bottom:12px"></div>
+  <div class="sk" style="height:16px;width:90%;margin-bottom:12px"></div>
+  <div class="sk" style="height:16px;width:82%"></div>
+</div>
+<footer>© 2026 KriptoHírek.hu</footer>
+
+<script>
+const CE={bitcoin:'₿',ethereum:'Ξ',defi:'🔷',altcoin:'🪙',piac:'📈',szabalyozas:'⚖️'};
+const CB={bitcoin:'#1a0e00',ethereum:'#0a0e1e',defi:'#001a15',altcoin:'#15001a',piac:'#001020',szabalyozas:'#1a0800'};
+const CC={bitcoin:'#f7931a',ethereum:'#627eea',defi:'#00d4aa',altcoin:'#a855f7',piac:'#3d8ef8',szabalyozas:'#ff6b35'};
+
+function detectCat(t){
+  t=(t||'').toLowerCase();
+  if(/bitcoin|btc/.test(t))return{label:'Bitcoin',key:'bitcoin'};
+  if(/ethereum|eth\b/.test(t))return{label:'Ethereum',key:'ethereum'};
+  if(/defi|uniswap|aave/.test(t))return{label:'DeFi',key:'defi'};
+  if(/sec\b|regulat|law|ban|legal/.test(t))return{label:'Szabályozás',key:'szabalyozas'};
+  if(/price|market|bull|bear|rally|crash/.test(t))return{label:'Piac',key:'piac'};
+  return{label:'Altcoin',key:'altcoin'};
+}
+function fmtDate(s){try{const d=Math.floor((Date.now()-new Date(s))/60000);if(d<60)return d+'p';if(d<1440)return Math.floor(d/60)+' órája';return Math.floor(d/1440)+' napja';}catch{return'ma';}}
+
+const slug = decodeURIComponent(location.pathname.replace(/^\/hir\//,'').replace(/\/$/,''));
+
+async function load(){
+  // Load from DB — instant
+  const r = await fetch('/api/news');
+  const data = await r.json();
+  if(!data.ok || !data.articles?.length) throw new Error('no data');
+
+  // Find article by slug
+  let article = data.articles.find(a => a.slug === slug);
+  if(!article) article = data.articles.find(a => (a.slug||'').slice(0,35) === slug.slice(0,35));
+  if(!article) article = data.articles[0];
+
+  const cat = detectCat(article.title+' '+(article.desc||''));
+  const clr = CC[cat.key]||'#f7931a';
+  const bg  = CB[cat.key]||'#1a0e00';
+
+  // Use Hungarian title
+  const title = article.titleHU || article.title;
+  document.title = title + ' — KriptoHírek.hu';
+  document.getElementById('pd').setAttribute('content', (article.desc||'').slice(0,160));
+
+  // Format body
+  let bodyHTML = '';
+  if(article.bodyHU && article.bodyHU.length > 50) {
+    const paras = article.bodyHU
+      .split(/\n\n+|\n(?=[A-ZÁÉÍÓÖŐÚÜŰ])/)
+      .map(p => p.replace(/\n/g,' ').trim())
+      .filter(p => p.length > 30);
+    bodyHTML = paras.length
+      ? paras.map(p=>`<p>${p}</p>`).join('')
+      : `<p>${article.bodyHU}</p>`;
+  } else {
+    bodyHTML = `<p>${article.desc || ''}</p>`;
+  }
+
+  const related = data.articles.filter(a=>a.slug!==article.slug).slice(0,4);
+
+  document.getElementById('wrap').innerHTML = `
+    <div class="art-cat">${cat.label}</div>
+    <h1>${title}</h1>
+    <div class="art-meta">
+      <span>KriptoHírek.hu</span>
+      <span>${fmtDate(article.publishedAt||article.date)}</span>
+      <span class="badge">✓ Magyar fordítás</span>
+    </div>
+    <div class="art-hero" style="background:${bg}">
+      <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 760 430"><defs><radialGradient id="hg"><stop offset="0%" stop-color="${clr}" stop-opacity=".2"/><stop offset="100%" stop-color="${clr}" stop-opacity="0"/></radialGradient></defs><rect width="760" height="430" fill="url(#hg)"/></svg>
+      ${article.img?`<img src="${article.img}" alt="" onerror="this.style.display='none'">`:''}
+      <div class="art-hero-emoji" ${article.img?'style="display:none"':''}>${CE[cat.key]||'🪙'}</div>
+    </div>
+    <div class="art-body">${bodyHTML}</div>
+    <div class="aff-box">
+      <div><h4>₿ Kriptót vásárolna?</h4><p>Regisztráljon Binance-re és kapjon exkluzív bónuszt.</p></div>
+      <a href="https://accounts.binance.com/register?ref=KRIPTOHIREK" target="_blank" rel="nofollow sponsored">+$600 USDT →</a>
+    </div>
+    ${related.length?`
+    <div class="related-title">Kapcsolódó hírek</div>
+    <div class="rgrid">${related.map(a=>{
+      const c=detectCat(a.title);
+      return`<a href="/hir/${a.slug}" class="rcard">
+        <div class="rthumb" style="background:${CB[c.key]||'#1a0e00'}">
+          ${a.img?`<img src="${a.img}" alt="" onerror="this.style.display='none'">`:''}
+          <span>${CE[c.key]||'🪙'}</span>
+        </div>
+        <div class="rbody"><div class="rcat">${c.label}</div><div class="rtitle">${a.titleHU||a.title.slice(0,70)}</div></div>
+      </a>`;
+    }).join('')}</div>` : ''}
+  `;
+}
+
+load().catch(()=>{
+  document.getElementById('wrap').innerHTML=
+    '<div style="text-align:center;padding:60px;color:var(--t2)">Hír betöltése sikertelen.<br><br><a href="/" style="color:var(--accent)">← Vissza a főoldalra</a></div>';
+});
+</script>
+</body>
+</html>

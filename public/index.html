@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KriptoHírek.hu — Magyar Kripto & Befektetési Hírek 2026</title>
+<meta name="description" content="Magyarország vezető kripto hírportálja. Bitcoin, Ethereum, DeFi hírek magyarul, naponta frissítve.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Unbounded:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#09090f;--bg2:#111318;--bg3:#181c25;--accent:#f7931a;--accent2:#ffb347;--green:#00d4aa;--red:#ff4757;--text:#e8eaf0;--t2:#7c8496;--t3:#3a3f52;--border:rgba(255,255,255,.06);--bordero:rgba(247,147,26,.22);--r:12px;--font:'Space Grotesk',sans-serif;--head:'Unbounded',sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px;}
+.up{color:var(--green);}.dn{color:var(--red);}
+.notify{background:var(--accent);color:#09090f;text-align:center;padding:9px 20px;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
+.notify a{background:rgba(0,0,0,.18);color:#09090f;text-decoration:none;padding:3px 10px;border-radius:5px;font-size:11px;}
+.notify a:hover{background:rgba(0,0,0,.35);}
+nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:58px;background:rgba(9,9,15,.93);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:var(--head);font-size:17px;font-weight:800;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.nav-logo-icon{width:30px;height:30px;border-radius:7px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:15px;}
+.ticker-wrap{overflow:hidden;flex:1;max-width:500px;margin:0 18px;mask-image:linear-gradient(90deg,transparent,black 8%,black 92%,transparent);}
+.ticker-inner{display:flex;gap:24px;white-space:nowrap;animation:tick 30s linear infinite;}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ti{font-size:12px;font-weight:600;display:flex;align-items:center;gap:5px;}
+.ti-sym{color:var(--t2);font-size:10px;font-family:var(--head);letter-spacing:.05em;}
+.ti-p{font-family:var(--head);}
+.ti-c{font-size:10px;}
+.nav-links{display:flex;gap:20px;}
+.nav-links a{color:var(--t2);text-decoration:none;font-size:13px;font-weight:500;transition:color .2s;}
+.nav-links a:hover{color:var(--text);}
+.nav-cta{background:var(--accent);color:#09090f;padding:8px 16px;border-radius:7px;font-size:12px;font-weight:700;text-decoration:none;transition:all .2s;white-space:nowrap;}
+.nav-cta:hover{background:var(--accent2);transform:translateY(-1px);}
+/* CAROUSEL */
+.carousel{position:relative;overflow:hidden;height:480px;}
+.carousel-track{display:flex;height:100%;transition:transform .6s cubic-bezier(.4,0,.2,1);}
+.slide{min-width:100%;height:100%;position:relative;flex-shrink:0;text-decoration:none;color:var(--text);display:block;}
+.slide-bg{position:absolute;inset:0;}
+.slide-bg img{width:100%;height:100%;object-fit:cover;opacity:.4;}
+.slide-bg-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:140px;opacity:.07;}
+.slide-gradient{position:absolute;inset:0;background:linear-gradient(to right,rgba(9,9,15,.96) 38%,rgba(9,9,15,.3) 100%),linear-gradient(to top,rgba(9,9,15,.95) 0%,transparent 55%);}
+.slide-content{position:absolute;bottom:0;left:0;right:0;padding:44px 52px;}
+.slide-tag{display:inline-flex;align-items:center;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px;padding:4px 12px;border-radius:5px;}
+.slide-title{font-family:var(--head);font-size:clamp(20px,3.2vw,36px);font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:12px;max-width:620px;}
+.slide-excerpt{font-size:14px;color:rgba(232,234,240,.65);max-width:520px;line-height:1.7;margin-bottom:16px;}
+.slide-meta{font-size:11px;color:rgba(232,234,240,.35);font-weight:600;}
+.slide-cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#09090f;padding:11px 22px;border-radius:8px;font-weight:700;font-size:13px;margin-top:16px;transition:all .2s;text-decoration:none;}
+.slide-cta:hover{background:var(--accent2);}
+.carousel-dots{position:absolute;bottom:18px;right:28px;display:flex;gap:7px;z-index:10;}
+.dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .3s;}
+.dot.on{background:var(--accent);width:22px;border-radius:4px;}
+.carousel-prev,.carousel-next{position:absolute;top:50%;transform:translateY(-50%);z-index:10;width:40px;height:40px;border-radius:50%;background:rgba(9,9,15,.7);border:1px solid var(--border);color:var(--text);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.carousel-prev{left:16px;}.carousel-next{right:16px;}
+.carousel-prev:hover,.carousel-next:hover{background:var(--accent);border-color:var(--accent);color:#09090f;}
+/* PRICE STRIP */
+.price-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:1px;background:var(--border);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.pc{background:var(--bg2);padding:13px 17px;transition:background .2s;}
+.pc:hover{background:var(--bg3);}
+.pc-sym{font-family:var(--head);font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
+.pc-price{font-family:var(--head);font-size:16px;font-weight:800;letter-spacing:-.5px;margin-bottom:2px;}
+.pc-chg{font-size:11px;font-weight:700;}
+/* MAIN */
+.main{max-width:1180px;margin:0 auto;padding:40px 28px;}
+.grid{display:grid;grid-template-columns:1fr 316px;gap:24px;}
+.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.sec-label{font-family:var(--head);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;display:flex;align-items:center;gap:8px;}
+.sec-label::before{content:'';width:3px;height:14px;background:var(--accent);border-radius:2px;}
+/* TABS */
+.tabs{display:flex;gap:5px;margin-bottom:16px;flex-wrap:wrap;}
+.tab{padding:5px 13px;border-radius:7px;font-size:12px;font-weight:600;border:1px solid var(--border);background:transparent;color:var(--t2);cursor:pointer;transition:all .2s;font-family:var(--font);}
+.tab.on,.tab:hover{background:var(--accent);color:#09090f;border-color:var(--accent);}
+/* NEWS GRID */
+.news-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:10px;}
+.ni{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;text-decoration:none;color:var(--text);transition:all .22s;display:block;}
+.ni:hover{border-color:var(--bordero);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.5);}
+.ni-thumb{height:170px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--bg3);}
+.ni-thumb.sm{height:110px;}
+.ni-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.75;}
+.ni-thumb-emoji{font-size:40px;position:relative;z-index:1;}
+.ni-thumb.sm .ni-thumb-emoji{font-size:26px;}
+.ni-cat-badge{position:absolute;top:10px;left:10px;z-index:2;font-size:9px;font-weight:800;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.08em;}
+.ni-body{padding:14px 16px;}
+.ni-title{font-family:var(--head);font-size:14px;font-weight:700;line-height:1.3;letter-spacing:-.2px;margin-bottom:7px;}
+.ni-title.sm{font-size:12px;}
+.ni-excerpt{font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:8px;}
+.ni-meta{font-size:10px;color:var(--t3);font-weight:600;}
+/* LIST */
+.nl-list{display:flex;flex-direction:column;gap:2px;}
+.ni-list{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:13px 15px;display:grid;grid-template-columns:52px 1fr;gap:11px;text-decoration:none;color:var(--text);transition:all .2s;align-items:center;}
+.ni-list:hover{border-color:var(--bordero);background:var(--bg3);transform:translateX(3px);}
+.ni-list-thumb{width:52px;height:52px;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:22px;background:var(--bg3);flex-shrink:0;}
+.ni-list-thumb img{width:100%;height:100%;object-fit:cover;}
+.ni-list-cat{font-size:9px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;}
+.ni-list-title{font-size:13px;font-weight:600;line-height:1.4;}
+.ni-list-meta{font-size:10px;color:var(--t3);font-weight:600;margin-top:4px;}
+.load-btn{width:100%;padding:12px;border-radius:10px;background:var(--bg2);border:1px solid var(--border);color:var(--t2);font-size:13px;font-weight:600;font-family:var(--font);cursor:pointer;transition:all .2s;margin-top:10px;}
+.load-btn:hover{border-color:var(--bordero);color:var(--text);background:var(--bg3);}
+/* SIDEBAR */
+.sidebar{display:flex;flex-direction:column;gap:18px;}
+.sbox{background:var(--bg2);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.sbox-head{padding:12px 16px;border-bottom:1px solid var(--border);font-family:var(--head);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--t2);display:flex;align-items:center;justify-content:space-between;}
+.aff-card{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--text);transition:background .2s;}
+.aff-card:hover{background:var(--bg3);}
+.aff-card:last-child{border-bottom:none;}
+.aff-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.aff-info{flex:1;}
+.aff-name{font-family:var(--head);font-size:12px;font-weight:700;}
+.aff-bonus{font-size:11px;color:var(--accent);font-weight:600;}
+.aff-tag{font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;background:rgba(247,147,26,.1);color:var(--accent);border:1px solid rgba(247,147,26,.2);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;}
+.pw-row{padding:11px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;transition:background .15s;}
+.pw-row:hover{background:var(--bg3);}
+.pw-row:last-child{border-bottom:none;}
+.pw-coin{display:flex;align-items:center;gap:9px;}
+.pw-icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;}
+.pw-sym{font-family:var(--head);font-size:12px;font-weight:700;}
+.pw-name{font-size:10px;color:var(--t2);}
+.pw-price{font-family:var(--head);font-size:13px;font-weight:700;text-align:right;}
+.pw-chg{font-size:11px;font-weight:700;text-align:right;}
+.pw-live{font-size:9px;color:var(--green);font-weight:700;}
+.nl-wrap{padding:15px 16px;}
+.nl-wrap p{font-size:12px;color:var(--t2);margin-bottom:12px;line-height:1.7;}
+.nl-inp{width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:9px 12px;border-radius:8px;font-size:12px;font-family:var(--font);outline:none;margin-bottom:8px;transition:border-color .2s;}
+.nl-inp:focus{border-color:var(--accent);}
+.nl-btn{width:100%;background:var(--accent);color:#09090f;border:none;padding:9px;border-radius:8px;font-size:12px;font-weight:700;font-family:var(--font);cursor:pointer;transition:all .2s;}
+.nl-btn:hover{background:var(--accent2);}
+/* SKELETON */
+.sk{background:linear-gradient(90deg,var(--bg2) 25%,var(--bg3) 50%,var(--bg2) 75%);background-size:200% 100%;animation:sh 1.5s infinite;border-radius:6px;}
+@keyframes sh{0%{background-position:200% 0}100%{background-position:-200% 0}}
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:44px 28px 22px;margin-top:48px;}
+.fi{max-width:1180px;margin:0 auto;}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:34px;}
+.f-logo{font-family:var(--head);font-size:18px;font-weight:800;color:var(--text);text-decoration:none;display:block;margin-bottom:10px;}
+.f-desc{font-size:12px;color:var(--t2);line-height:1.8;max-width:230px;}
+.fc h4{font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px;}
+.fc a{display:block;font-size:12px;color:var(--t2);text-decoration:none;margin-bottom:8px;transition:color .2s;font-weight:500;cursor:pointer;}
+.fc a:hover{color:var(--accent);}
+.fb{border-top:1px solid var(--border);padding-top:18px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;}
+.fd{font-size:10px;color:var(--t3);max-width:580px;line-height:1.7;}
+.fc2{font-size:11px;color:var(--t3);font-weight:600;white-space:nowrap;}
+@media(max-width:900px){.grid{grid-template-columns:1fr;}.sidebar{order:-1;}.ticker-wrap,.nav-links{display:none;}.carousel{height:340px;}.slide-content{padding:28px 20px;}.news-grid{grid-template-columns:1fr;}.fg{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){nav,.main,footer{padding-left:14px;padding-right:14px;}.carousel{height:290px;}.fg{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="notify">🚀 Exkluzív: <strong>+$600 USDT bónusz</strong> Binance regisztrációval <a href="https://accounts.binance.com/register?ref=KRIPTOHIREK" target="_blank" rel="nofollow sponsored">Igényeld →</a></div>
+
+<nav>
+  <a href="/" class="nav-logo"><div class="nav-logo-icon">₿</div>KriptoHírek</a>
+  <div class="ticker-wrap">
+    <div class="ticker-inner" id="ticker">
+      <span class="ti"><span class="ti-sym">BTC</span><span class="ti-p" id="tb">...</span><span class="ti-c up" id="tbc">+0%</span></span>
+      <span class="ti"><span class="ti-sym">ETH</span><span class="ti-p" id="te">...</span><span class="ti-c up" id="tec">+0%</span></span>
+      <span class="ti"><span class="ti-sym">BNB</span><span class="ti-p" id="tnb">...</span><span class="ti-c dn" id="tnc">+0%</span></span>
+      <span class="ti"><span class="ti-sym">SOL</span><span class="ti-p" id="ts">...</span><span class="ti-c up" id="tsc">+0%</span></span>
+      <span class="ti"><span class="ti-sym">XRP</span><span class="ti-p" id="tx">...</span><span class="ti-c up" id="txc">+0%</span></span>
+      <span class="ti"><span class="ti-sym">BTC</span><span class="ti-p">...</span><span class="ti-c up">+0%</span></span>
+      <span class="ti"><span class="ti-sym">ETH</span><span class="ti-p">...</span><span class="ti-c up">+0%</span></span>
+      <span class="ti"><span class="ti-sym">SOL</span><span class="ti-p">...</span><span class="ti-c up">+0%</span></span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#hirek">Hírek</a>
+    <a href="#arfolyam">Árfolyam</a>
+    <a href="#tuzsde">Tőzsdék</a>
+    <a href="#hirlevel">Hírlevél</a>
+  </div>
+  <a href="https://accounts.binance.com/register?ref=KRIPTOHIREK" target="_blank" rel="nofollow sponsored" class="nav-cta">Kereskedés →</a>
+</nav>
+
+<div class="carousel" id="carousel">
+  <div class="carousel-track" id="carouselTrack">
+    <div class="slide"><div class="slide-bg sk" style="position:absolute;inset:0;border-radius:0"></div></div>
+  </div>
+  <button class="carousel-prev" onclick="carouselPrev()">‹</button>
+  <button class="carousel-next" onclick="carouselNext()">›</button>
+  <div class="carousel-dots" id="carouselDots"></div>
+</div>
+
+<div class="price-strip" id="priceStrip">
+  <div class="pc"><div class="sk" style="height:10px;width:35px;margin-bottom:5px"></div><div class="sk" style="height:16px;width:75px"></div></div>
+  <div class="pc"><div class="sk" style="height:10px;width:35px;margin-bottom:5px"></div><div class="sk" style="height:16px;width:75px"></div></div>
+  <div class="pc"><div class="sk" style="height:10px;width:35px;margin-bottom:5px"></div><div class="sk" style="height:16px;width:75px"></div></div>
+  <div class="pc"><div class="sk" style="height:10px;width:35px;margin-bottom:5px"></div><div class="sk" style="height:16px;width:75px"></div></div>
+  <div class="pc"><div class="sk" style="height:10px;width:35px;margin-bottom:5px"></div><div class="sk" style="height:16px;width:75px"></div></div>
+  <div class="pc"><div class="sk" style="height:10px;width:35px;margin-bottom:5px"></div><div class="sk" style="height:16px;width:75px"></div></div>
+</div>
+
+<div class="main" id="hirek">
+  <div class="grid">
+    <div>
+      <div class="tabs">
+        <button class="tab on" onclick="setFilter('all',this)">Összes</button>
+        <button class="tab" onclick="setFilter('bitcoin',this)">Bitcoin</button>
+        <button class="tab" onclick="setFilter('ethereum',this)">Ethereum</button>
+        <button class="tab" onclick="setFilter('defi',this)">DeFi</button>
+        <button class="tab" onclick="setFilter('altcoin',this)">Altcoin</button>
+        <button class="tab" onclick="setFilter('piac',this)">Piac</button>
+        <button class="tab" onclick="setFilter('szabalyozas',this)">Szabályozás</button>
+      </div>
+      <div class="sec-head">
+        <div class="sec-label">Legfrissebb hírek</div>
+        <span style="font-size:11px;color:var(--t2);font-weight:600" id="countLabel">Betöltés...</span>
+      </div>
+      <div id="newsGrid" class="news-grid">
+        <div class="ni" style="grid-column:1/-1"><div class="sk" style="height:170px;border-radius:0"></div><div class="ni-body"><div class="sk" style="height:16px;width:80%;margin-bottom:8px"></div><div class="sk" style="height:12px;width:60%"></div></div></div>
+        <div class="ni"><div class="sk" style="height:110px;border-radius:0"></div><div class="ni-body"><div class="sk" style="height:14px;width:85%;margin-bottom:6px"></div></div></div>
+        <div class="ni"><div class="sk" style="height:110px;border-radius:0"></div><div class="ni-body"><div class="sk" style="height:14px;width:75%;margin-bottom:6px"></div></div></div>
+      </div>
+      <div class="nl-list" id="newsList"></div>
+      <button class="load-btn" id="loadBtn" onclick="loadMore()" style="display:none">↓ További hírek</button>
+    </div>
+
+    <div class="sidebar">
+      <div class="sbox" id="tuzsde">
+        <div class="sbox-head">🏦 Ajánlott Tőzsdék</div>
+        <a href="https://accounts.binance.com/register?ref=KRIPTOHIREK" target="_blank" rel="nofollow sponsored" class="aff-card"><div class="aff-icon" style="background:#1a1100">🟡</div><div class="aff-info"><div class="aff-name">Binance</div><div class="aff-bonus">+$600 USDT bónusz</div></div><span class="aff-tag">#1</span></a>
+        <a href="https://www.bitget.com/referral/register?from=referral&clacCode=KRIPTOHIREK" target="_blank" rel="nofollow sponsored" class="aff-card"><div class="aff-icon" style="background:#001508">🟢</div><div class="aff-info"><div class="aff-name">Bitget</div><div class="aff-bonus">+$5.005 csomag</div></div><span class="aff-tag">Gyors</span></a>
+        <a href="https://www.okx.com/join/KRIPTOHIREK" target="_blank" rel="nofollow sponsored" class="aff-card"><div class="aff-icon" style="background:#0a0a0a">⚫</div><div class="aff-info"><div class="aff-name">OKX</div><div class="aff-bonus">50% trading kedvezmény</div></div><span class="aff-tag">Top 3</span></a>
+        <a href="https://www.bybit.com/en/register?affiliate_id=KRIPTOHIREK" target="_blank" rel="nofollow sponsored" class="aff-card"><div class="aff-icon" style="background:#00101a">🔵</div><div class="aff-info"><div class="aff-name">Bybit</div><div class="aff-bonus">$30.000 jutalom csomag</div></div><span class="aff-tag">Futures</span></a>
+        <a href="https://crypto.com/app/KRIPTOHIREK" target="_blank" rel="nofollow sponsored" class="aff-card"><div class="aff-icon" style="background:#00061a">💙</div><div class="aff-info"><div class="aff-name">Crypto.com</div><div class="aff-bonus">$25 CRO bónusz</div></div><span class="aff-tag">Kártya</span></a>
+      </div>
+      <div class="sbox" id="arfolyam">
+        <div class="sbox-head">📊 Élő Árfolyam <span class="pw-live">● ÉLŐ</span></div>
+        <div id="pwRows">
+          <div class="pw-row"><div class="pw-coin"><div class="pw-icon">₿</div><div><div class="pw-sym">BTC</div><div class="pw-name">Bitcoin</div></div></div><div><div class="sk" style="height:14px;width:70px;margin-bottom:3px"></div><div class="sk" style="height:11px;width:42px"></div></div></div>
+          <div class="pw-row"><div class="pw-coin"><div class="pw-icon">Ξ</div><div><div class="pw-sym">ETH</div><div class="pw-name">Ethereum</div></div></div><div><div class="sk" style="height:14px;width:70px;margin-bottom:3px"></div><div class="sk" style="height:11px;width:42px"></div></div></div>
+          <div class="pw-row"><div class="pw-coin"><div class="pw-icon">◎</div><div><div class="pw-sym">SOL</div><div class="pw-name">Solana</div></div></div><div><div class="sk" style="height:14px;width:70px;margin-bottom:3px"></div><div class="sk" style="height:11px;width:42px"></div></div></div>
+          <div class="pw-row"><div class="pw-coin"><div class="pw-icon">✕</div><div><div class="pw-sym">XRP</div><div class="pw-name">Ripple</div></div></div><div><div class="sk" style="height:14px;width:70px;margin-bottom:3px"></div><div class="sk" style="height:11px;width:42px"></div></div></div>
+          <div class="pw-row"><div class="pw-coin"><div class="pw-icon">●</div><div><div class="pw-sym">BNB</div><div class="pw-name">BNB Chain</div></div></div><div><div class="sk" style="height:14px;width:70px;margin-bottom:3px"></div><div class="sk" style="height:11px;width:42px"></div></div></div>
+        </div>
+      </div>
+      <div class="sbox" id="hirlevel">
+        <div class="sbox-head">🔔 Kripto Hírlevél</div>
+        <div class="nl-wrap">
+          <p>Heti összefoglaló a legfontosabb kripto hírekről az e-mail-jébe.</p>
+          <input class="nl-inp" type="email" id="nlEmail" placeholder="email@example.hu">
+          <button class="nl-btn" onclick="nlSubmit()">Feliratkozom →</button>
+          <div id="nlMsg" style="font-size:11px;text-align:center;margin-top:6px;min-height:16px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="fi">
+    <div class="fg">
+      <div><a href="/" class="f-logo">₿ KriptoHírek.hu</a><p class="f-desc">Magyarország AI-alapú kripto hírportálja. Friss hírek, árfolyamok és elemzések magyarul minden nap.</p></div>
+      <div class="fc"><h4>Hírek</h4>
+        <a href="#hirek" onclick="setFilter('bitcoin',document.querySelectorAll('.tab')[1])">Bitcoin hírek</a>
+        <a href="#hirek" onclick="setFilter('ethereum',document.querySelectorAll('.tab')[2])">Ethereum hírek</a>
+        <a href="#hirek" onclick="setFilter('defi',document.querySelectorAll('.tab')[3])">DeFi &amp; Web3</a>
+        <a href="#hirek" onclick="setFilter('altcoin',document.querySelectorAll('.tab')[4])">Altcoin hírek</a>
+        <a href="#hirek" onclick="setFilter('piac',document.querySelectorAll('.tab')[5])">Piac elemzés</a>
+        <a href="#hirek" onclick="setFilter('szabalyozas',document.querySelectorAll('.tab')[6])">Szabályozás</a>
+      </div>
+      <div class="fc"><h4>Tőzsdék</h4>
+        <a href="https://accounts.binance.com/register?ref=KRIPTOHIREK" target="_blank" rel="nofollow sponsored">🟡 Binance</a>
+        <a href="https://www.bitget.com/referral/register?clacCode=KRIPTOHIREK" target="_blank" rel="nofollow sponsored">🟢 Bitget</a>
+        <a href="https://www.okx.com/join/KRIPTOHIREK" target="_blank" rel="nofollow sponsored">⚫ OKX</a>
+        <a href="https://www.bybit.com/en/register?affiliate_id=KRIPTOHIREK" target="_blank" rel="nofollow sponsored">🔵 Bybit</a>
+        <a href="https://crypto.com/app/KRIPTOHIREK" target="_blank" rel="nofollow sponsored">💙 Crypto.com</a>
+      </div>
+      <div class="fc"><h4>Útmutatók</h4>
+        <a href="#hirek" onclick="setFilter('bitcoin',document.querySelectorAll('.tab')[1])">Bitcoin vásárlás</a>
+        <a href="#arfolyam">Kripto árfolyam</a>
+        <a href="#hirek" onclick="setFilter('defi',document.querySelectorAll('.tab')[3])">DeFi kezdőknek</a>
+        <a href="#tuzsde">Tőzsde összehasonlítás</a>
+        <a href="#hirlevel">Hírlevél</a>
+      </div>
+    </div>
+    <div class="fb">
+      <p class="fd">⚠️ <strong>Kockázati figyelmeztetés:</strong> A kriptovaluták befektetése magas kockázattal jár. Ez az oldal nem pénzügyi tanácsadás. Affiliate jutalékot kaphatunk. 18+</p>
+      <div class="fc2">© 2026 KriptoHírek.hu</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+'use strict';
+
+// ═══ CONFIG ═══
+const COINS=[{id:'bitcoin',sym:'BTC',name:'Bitcoin',icon:'₿'},{id:'ethereum',sym:'ETH',name:'Ethereum',icon:'Ξ'},{id:'binancecoin',sym:'BNB',name:'BNB Chain',icon:'●'},{id:'solana',sym:'SOL',name:'Solana',icon:'◎'},{id:'ripple',sym:'XRP',name:'Ripple',icon:'✕'},{id:'cardano',sym:'ADA',name:'Cardano',icon:'⬡'},{id:'avalanche-2',sym:'AVAX',name:'Avalanche',icon:'▲'},{id:'chainlink',sym:'LINK',name:'Chainlink',icon:'⬡'}];
+const CE={bitcoin:'₿',ethereum:'Ξ',defi:'🔷',altcoin:'🪙',piac:'📈',szabalyozas:'⚖️'};
+const CB={bitcoin:'#1a0e00',ethereum:'#0a0e1e',defi:'#001a15',altcoin:'#15001a',piac:'#001020',szabalyozas:'#1a0800'};
+const CC={bitcoin:'#f7931a',ethereum:'#627eea',defi:'#00d4aa',altcoin:'#a855f7',piac:'#3d8ef8',szabalyozas:'#ff6b35'};
+
+// ═══ PRICES ═══
+async function fetchPrices(){
+  try{
+    const ids=COINS.map(c=>c.id).join(',');
+    const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids='+ids+'&vs_currencies=usd&include_24hr_change=true');
+    const d=await r.json();
+    // Price strip
+    document.getElementById('priceStrip').innerHTML=COINS.map(c=>{
+      const p=d[c.id];if(!p)return'';
+      const chg=(p.usd_24h_change||0).toFixed(2),cls=chg>=0?'up':'dn';
+      return'<div class="pc"><div class="pc-sym">'+c.icon+' '+c.sym+'</div><div class="pc-price '+cls+'">$'+p.usd.toLocaleString('en-US')+'</div><div class="pc-chg '+cls+'">'+(chg>=0?'+':'')+chg+'%</div></div>';
+    }).join('');
+    // Sidebar
+    document.getElementById('pwRows').innerHTML=COINS.slice(0,5).map(c=>{
+      const p=d[c.id];if(!p)return'';
+      const chg=(p.usd_24h_change||0).toFixed(2),cls=chg>=0?'up':'dn';
+      return'<div class="pw-row"><div class="pw-coin"><div class="pw-icon">'+c.icon+'</div><div><div class="pw-sym">'+c.sym+'</div><div class="pw-name">'+c.name+'</div></div></div><div><div class="pw-price '+cls+'">$'+p.usd.toLocaleString('en-US')+'</div><div class="pw-chg '+cls+'">'+(chg>=0?'+':'')+chg+'%</div></div></div>';
+    }).join('');
+    // Ticker
+    const btc=d.bitcoin;
+    if(btc){
+      const chg=(btc.usd_24h_change||0).toFixed(2);
+      document.getElementById('tb').textContent='$'+btc.usd.toLocaleString('en-US');
+      const el=document.getElementById('tbc');
+      el.textContent=(chg>=0?'+':'')+chg+'%';
+      el.className='ti-c '+(chg>=0?'up':'dn');
+    }
+    const eth=d.ethereum;if(eth)document.getElementById('te').textContent='$'+eth.usd.toLocaleString('en-US');
+    const bnb=d.binancecoin;if(bnb)document.getElementById('tnb').textContent='$'+bnb.usd.toLocaleString('en-US');
+    const sol=d.solana;if(sol)document.getElementById('ts').textContent='$'+sol.usd.toLocaleString('en-US');
+    const xrp=d.ripple;if(xrp)document.getElementById('tx').textContent='$'+xrp.usd.toLocaleString('en-US');
+  }catch(e){console.warn('prices:',e);}
+}
+fetchPrices();
+setInterval(fetchPrices,60000);
+
+// ═══ HELPERS ═══
+function detectCat(t){
+  t=(t||'').toLowerCase();
+  if(/bitcoin|btc|\bsatoshi\b/.test(t))return{label:'Bitcoin',key:'bitcoin'};
+  if(/ethereum|eth\b|vitalik|layer.?2|arbitrum|optimism|polygon/.test(t))return{label:'Ethereum',key:'ethereum'};
+  if(/defi|uniswap|aave|compound|yield|dex\b/.test(t))return{label:'DeFi',key:'defi'};
+  if(/sec\b|regulat|law|government|ban|legal|court/.test(t))return{label:'Szabályozás',key:'szabalyozas'};
+  if(/price|market|bull|bear|rally|crash|ath|surge|dump|forecast|chart/.test(t))return{label:'Piac',key:'piac'};
+  return{label:'Altcoin',key:'altcoin'};
+}
+function fmtDate(s){try{const d=Math.floor((Date.now()-new Date(s))/60000);if(d<1)return'most';if(d<60)return d+'p';if(d<1440)return Math.floor(d/60)+'ó';return Math.floor(d/1440)+'n';}catch{return'ma';}}
+function slugify(s){return(s||'').toLowerCase().replace(/[áàäéèíìóòöőúùüű]/g,c=>({á:'a',à:'a',ä:'a',é:'e',è:'e',í:'i',ì:'i',ó:'o',ò:'o',ö:'o',ő:'o',ú:'u',ù:'u',ü:'u',ű:'u'}[c]||c)).replace(/[^a-z0-9\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').slice(0,70).replace(/-$/,'');}
+
+// ═══ CAROUSEL ═══
+let carouselIdx=0,carouselTotal=0,carouselTimer=null;
+function buildCarousel(arts){
+  const slides=arts.slice(0,6);
+  carouselTotal=slides.length;
+  const track=document.getElementById('carouselTrack');
+  const dots=document.getElementById('carouselDots');
+  if(!track||!slides.length)return;
+  track.innerHTML=slides.map((a,i)=>{
+    const cat=detectCat(a.title),c=cat.key,clr=CC[c]||'#f7931a',bg=CB[c]||'#1a0e00';
+    const slug=a.slug||slugify(a.title);
+    const title=a.titleHU||a.title;
+    return`<a class="slide" href="/hir/${slug}">
+      <div class="slide-bg" style="background:${bg}">${a.img?`<img src="${a.img}" alt="" onerror="this.style.display='none'">`:``}
+        <div class="slide-bg-emoji">${CE[c]||'🪙'}</div>
+      </div>
+      <div class="slide-gradient"></div>
+      <div class="slide-content">
+        <div class="slide-tag" style="background:${clr}22;color:${clr};border:1px solid ${clr}44">${cat.label}</div>
+        <div class="slide-title">${title}</div>
+        <div class="slide-excerpt">${(a.desc||'').slice(0,140)}</div>
+        <div class="slide-meta"><span>KriptoHírek.hu</span><span>${fmtDate(a.date)}</span></div>
+        <div class="slide-cta">Olvass tovább →</div>
+      </div>
+    </a>`;
+  }).join('');
+  dots.innerHTML=slides.map((_,i)=>`<div class="dot${i===0?' on':''}" onclick="goSlide(${i})"></div>`).join('');
+  startCarouselTimer();
+}
+function goSlide(n){
+  carouselIdx=(n+carouselTotal)%carouselTotal;
+  document.getElementById('carouselTrack').style.transform=`translateX(-${carouselIdx*100}%)`;
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===carouselIdx));
+  resetCarouselTimer();
+}
+function carouselNext(){goSlide(carouselIdx+1);}
+function carouselPrev(){goSlide(carouselIdx-1);}
+function startCarouselTimer(){clearInterval(carouselTimer);carouselTimer=setInterval(()=>goSlide(carouselIdx+1),5000);}
+function resetCarouselTimer(){clearInterval(carouselTimer);startCarouselTimer();}
+let touchX=null;
+document.addEventListener('touchstart',e=>{if(e.target.closest('.carousel'))touchX=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',e=>{
+  if(touchX===null)return;
+  const diff=touchX-e.changedTouches[0].clientX;
+  if(Math.abs(diff)>50)diff>0?carouselNext():carouselPrev();
+  touchX=null;
+});
+
+// ═══ NEWS — Server does all translation, we just render ═══
+let articles=[],curFilter='all',shown=0;
+const PAGE=8;
+
+function getFiltered(){return curFilter==='all'?articles:articles.filter(a=>a.cat.key===curFilter);}
+
+function render(){
+  const list=getFiltered();
+  const countEl=document.getElementById('countLabel');
+  if(countEl)countEl.textContent=list.length+' cikk';
+  if(!list.length){
+    document.getElementById('newsGrid').innerHTML='<div style="grid-column:1/-1;padding:32px;text-align:center;color:var(--t2)">Nincs találat.</div>';
+    document.getElementById('newsList').innerHTML='';
+    document.getElementById('loadBtn').style.display='none';
+    return;
+  }
+  // Top 3 magazine grid
+  const top3=list.slice(0,3);
+  document.getElementById('newsGrid').innerHTML=top3.map((a,i)=>{
+    const c=a.cat.key,clr=CC[c]||'#f7931a',bg=CB[c]||'#1a0e00';
+    const slug=a.slug||slugify(a.title);
+    const big=i===0;
+    const title=a.titleHU||a.title;
+    return`<a href="/hir/${slug}" class="ni"${big?' style="grid-column:1/-1"':''}>
+      <div class="ni-thumb${big?'':' sm'}" style="background:${bg}">
+        <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 400 200"><defs><radialGradient id="ng${i}"><stop offset="0%" stop-color="${clr}" stop-opacity=".2"/><stop offset="100%" stop-color="${clr}" stop-opacity="0"/></radialGradient></defs><rect width="400" height="200" fill="url(#ng${i})"/></svg>
+        ${a.img?`<img src="${a.img}" alt="" onerror="this.style.display='none'">`:''}
+        <span class="ni-thumb-emoji">${CE[c]||'🪙'}</span>
+        <span class="ni-cat-badge" style="background:${clr};color:#09090f">${a.cat.label}</span>
+      </div>
+      <div class="ni-body">
+        <div class="ni-title${big?'':' sm'}">${title}</div>
+        ${big?`<div class="ni-excerpt">${(a.desc||'').slice(0,120)}</div>`:''}
+        <div class="ni-meta">${fmtDate(a.date)}</div>
+      </div>
+    </a>`;
+  }).join('');
+  // List items
+  const items=list.slice(3,3+PAGE+shown);
+  document.getElementById('newsList').innerHTML=items.map(a=>{
+    const c=a.cat.key,slug=a.slug||slugify(a.title),title=a.titleHU||a.title;
+    const th=a.img?`<img src="${a.img}" alt="" loading="lazy" onerror="this.outerHTML='<span style=\'font-size:22px\'>${CE[c]||'🪙'}</span>'">`:`<span style="font-size:22px">${CE[c]||'🪙'}</span>`;
+    return`<a href="/hir/${slug}" class="ni-list">
+      <div class="ni-list-thumb">${th}</div>
+      <div><div class="ni-list-cat">${a.cat.label}</div><div class="ni-list-title">${title}</div><div class="ni-list-meta">${fmtDate(a.date)}</div></div>
+    </a>`;
+  }).join('');
+  shown=items.length;
+  document.getElementById('loadBtn').style.display=list.length>shown+3?'block':'none';
+}
+
+function setFilter(f,btn){
+  curFilter=f;shown=0;
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  render();
+}
+function loadMore(){shown+=PAGE;render();}
+
+async function loadNews(){
+  try{
+    const r=await fetch('/api/news');
+    if(!r.ok) throw new Error(r.status);
+    const data=await r.json();
+
+    // If DB empty, show message to wait for cron
+    if(!data.articles?.length){
+      document.getElementById('countLabel').textContent='Hamarosan...';
+      document.getElementById('newsGrid').innerHTML='<div style="grid-column:1/-1;padding:48px 32px;text-align:center;color:var(--t2)"><div style="font-size:32px;margin-bottom:16px">⏳</div><div style="font-family:var(--head);font-size:16px;margin-bottom:8px">Hírek betöltése folyamatban</div><div style="font-size:13px">Az első hírek hamarosan megjelennek.</div></div>';
+      return;
+    }
+
+    const seen=new Set();
+    articles=data.articles
+      .filter(a=>{if(!a.slug||seen.has(a.slug))return false;seen.add(a.slug);return true;})
+      .map(a=>({...a, cat:detectCat(a.title+' '+(a.desc||''))}));
+
+    document.getElementById('countLabel').textContent=articles.length+' friss cikk';
+    buildCarousel(articles);
+    render();
+  }catch(e){
+    console.error('News:',e);
+    document.getElementById('countLabel').textContent='Betöltési hiba';
+    document.getElementById('newsGrid').innerHTML='<div style="grid-column:1/-1;padding:32px;text-align:center;color:var(--t2)">Betöltés sikertelen. <a onclick="loadNews()" style="color:var(--accent);cursor:pointer">Újra →</a></div>';
+  }
+}
+
