@@ -1,0 +1,11 @@
+name: Fetch News
+on:
+  schedule:
+      - cron: '0 6,12,18,0 * * *'
+        workflow_dispatch:
+        jobs:
+          fetch:
+              runs-on: ubuntu-latest
+                  steps:
+                        - name: Trigger cron
+                                run: curl -s "https://kriptohirek3.vercel.app/api/cron?secret=${{ secrets.CRON_SECRET }}" --max-time 55
